@@ -91,11 +91,11 @@ const star = document.querySelector('#star');
 document.querySelector('#solve').addEventListener('click', solveClickHandler);
 document.querySelector('#reset').addEventListener('click', resetClickHandler);
 
-/*
-(function(rowData, colData) {
+function insertNumbers(rowData = [], colData = []) {
+	if (rowData.length === 0) rowData = [6, 3, 3, 3, 7];
+	if (colData.length === 0) colData = [2, 8, 7, 1, 5];
 	for (let i = 1; i <= 5; i++) {
 		document.querySelector(`#row_${i}`).value = rowData[i -1];
 		document.querySelector(`#col_${i}`).value = colData[i -1];
 	}
-})([6, 3, 3, 3, 7], [2, 8, 7, 1, 5]);
-*/
+}
