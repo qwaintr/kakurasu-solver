@@ -25,7 +25,6 @@ h1 {
 p {
 	color: white;
 	font-size: 1.6rem;
-	font-weight: 400;
 	line-height: 200%;
 }
 
@@ -64,19 +63,19 @@ p {
 }
 
 input {
-	color: #eee;
+	color: rgb(240, 240, 240);
 	width: 40px;
-	height: 38px;
+	height: 40px;
 	text-align: center;
-	font-size: 2rem;
+	font-size: 1.9rem;
 	outline: none;
-	border: 2px solid #595857;
+	border: 2px solid rgb(90, 90, 90);
 	border-radius: 5px;
 	background-color: rgb(120, 120, 120);
 }
 
 input:focus {
-	border: 2px solid #999;
+	border: 2px solid rgb(60, 60, 60);
 	background-color: rgb(140, 140, 140);
 }
 
@@ -88,19 +87,21 @@ input:focus {
 	margin-top: -6px;
 }
 
-.darken {
-	background-color: rgb(90, 90, 90);
-}
-
 .output {
 	background-color: rgb(70, 70, 70);
 }
 
-.starred {
+.darken {
+	background-color: rgb(70, 70, 70);
+	border-color: rgb(70, 70, 70);
+	color: rgb(130, 130, 130);
+}
+
+.lighten {
 	 background-color: rgb(90, 90, 90);
 }
 
-.controls {
+#controls {
 	margin-top: 6px;
 	background-color: rgb(60, 60, 60);
 	width: 280px;
@@ -117,15 +118,15 @@ button {
 	border-radius: 4px;
 	padding: 8px 43px;
 	background-color: rgb(120, 120, 120);
-	font-weight: 400;
 	color: rgb(230, 230, 230);
 	outline: none;
 	flex: 1;
+	font-size: 1.6rem;
 }
 
 button:hover {
 	background-color: rgb(140, 140, 140);
-	border: 2px solid #999;
+	border: 2px solid rgb(160, 160, 160);
 }
 
 button:active {
@@ -141,6 +142,33 @@ button:active {
 	margin-left: 3px;
 }
 
-body > svg {
-	display: none;
+.star {
+	background-image: url('star.svg');
+	background-repeat: no-repeat;
+	background-size: 36px;
+	background-position: center;
+}
+
+@media screen and (max-width: 480px) {
+	p {
+		padding: 0 10px;
+		font-size: 1.4rem;
+	}
+	#grid {
+		width: 326px;
+		height: 326px;
+	}
+	input {
+		width: 32px;
+		height: 32px;
+	}
+	#controls {
+		width: 326px;
+	}
+	button {
+		font-size: 1.4rem;
+	}
+	.star {
+		background-size: 28px;
+	}
 }

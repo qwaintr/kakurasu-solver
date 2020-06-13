@@ -1,13 +1,6 @@
 class KakurasuSolver {
-	_boardGrid = [
-		[0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0],
-		[0, 0, 0, 0, 0]
-	];
 	_sumNumbers = [
-		null,
+		[[0]],
 		[[1]],
 		[[2]],
 		[[3], [1, 2]],
@@ -25,6 +18,7 @@ class KakurasuSolver {
 		[[1, 2, 3, 4, 5]]
 	];
 	constructor(rowTotals, colTotals) {
+		this._boardGrid = Array.from(Array(5), () => new Array(5).fill(0));
 		this._rowTotals = rowTotals;
 		this._colTotals = colTotals;
 	}
@@ -44,7 +38,7 @@ class KakurasuSolver {
 	}
 	_findSolution(rowIndex) {
 		if (rowIndex == 5) {
-			return this._validateColValues(this._isNotEqualToColValue);
+			return this._allColumnTotalsCompleted();
 		}
 		else {
 			const rowTotal = this._rowTotals[rowIndex];
@@ -55,7 +49,7 @@ class KakurasuSolver {
 				numbers.forEach((number) => {
 					this._boardGrid[rowIndex][number - 1] = number;
 				});
-				if (this._validateColValues(this._isOverTotalColValue) && this._findSolution(rowIndex + 1)) {
+				if (this._allColTotalsAreValid() && this._findSolution(rowIndex + 1)) {
 					return true;
 				}
 				numbers.forEach((number) => {
@@ -65,13 +59,7 @@ class KakurasuSolver {
 		}
 		return false;
 	}
-	_isOverTotalColValue(currentValue, targetValue) {
-		return currentValue > targetValue;
-	}
-	_isNotEqualToColValue(currentValue, targetValue) {
-		return currentValue !== targetValue;
-	}
-	_validateColValues(func) {
+	_validateColValues(isNotValid) {
 		for (let i = 0; i < 5; i++) {
 			const targetValue = this._colTotals[i];
 			let currentValue = 0;
@@ -80,8 +68,18 @@ class KakurasuSolver {
 					currentValue += (j + 1);
 				}
 			}
-			if (func(currentValue, targetValue)) return false;
+			if (isNotValid(currentValue, targetValue)) return false;
 		}
 		return true;
+	}
+	_allColumnTotalsCompleted() {
+		return this._validateColValues(function isInvalidTotal(currentValue, targetValue) {
+			return currentValue !== targetValue;
+		});
+	}
+	_allColTotalsAreValid() {
+		return this._validateColValues(function isInvalidValue(currentValue, targetValue) {
+			return currentValue > targetValue;
+		});
 	}
 }

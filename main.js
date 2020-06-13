@@ -51,28 +51,29 @@ function runSolver() {
 	isSolved = true;
 
 	let els = document.querySelectorAll('.output');
-	els.forEach(function displayStar(el, index) {
+	els.forEach(function lightenAndDisplayStar(el, index) {
+		el.classList.add('lighten');
 		if (solution[index] !== 0) {
-			el.classList.add('starred');
-			el.appendChild(star.cloneNode(true));
+			el.classList.add('star');
 		}
 	});
 	els = document.querySelectorAll('input');
-	els.forEach(function removeText(el) {
+	els.forEach(function disableInput(el) {
+		el.disabled = true;
 		el.classList.add('darken');
 	});
 }
 
 function runReset() {
 	let els = document.querySelectorAll('.output');
-	els.forEach(function removeStar(el) {
-		el.classList.remove('starred');
-		if (el.children.length > 0) el.textContent = '';
+	els.forEach(function removeLightenAndStar(el) {
+		el.classList.remove('lighten', 'star');
 	});
 	els = document.querySelectorAll('input');
-	els.forEach(function clearInput(el) {
+	els.forEach(function enableInput(el) {
 		el.value = '';
 		el.classList.remove('darken');
+		el.disabled = false;
 	});
 	isSolved = false;
 }
@@ -86,11 +87,6 @@ function resetClickHandler(event) {
 	runReset();
 }
 
-let isSolved = false;
-const star = document.querySelector('#star');
-document.querySelector('#solve').addEventListener('click', solveClickHandler);
-document.querySelector('#reset').addEventListener('click', resetClickHandler);
-
 function insertNumbers(rowData = [], colData = []) {
 	if (rowData.length === 0) rowData = [6, 3, 3, 3, 7];
 	if (colData.length === 0) colData = [2, 8, 7, 1, 5];
@@ -99,3 +95,7 @@ function insertNumbers(rowData = [], colData = []) {
 		document.querySelector(`#col_${i}`).value = colData[i -1];
 	}
 }
+
+let isSolved = false;
+document.querySelector('#solve').addEventListener('click', solveClickHandler);
+document.querySelector('#reset').addEventListener('click', resetClickHandler);
