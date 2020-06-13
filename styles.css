@@ -18,12 +18,12 @@ body {
 
 h1 {
 	font-size: 2.25rem;
-	color: #ccc;
+	color: rgb(205, 205, 205);
 	margin-bottom: 0;
 }
 
 p {
-	color: white;
+	color: rgb(240, 240, 240);
 	font-size: 1.6rem;
 	line-height: 200%;
 }
@@ -150,9 +150,11 @@ button:active {
 }
 
 @media screen and (max-width: 480px) {
+	h1 {
+		font-size: 1.95rem;
+	}
 	p {
-		padding: 0 10px;
-		font-size: 1.4rem;
+		font-size: 1.5rem;
 	}
 	#grid {
 		width: 326px;
